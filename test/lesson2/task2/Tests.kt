@@ -30,9 +30,9 @@ class Tests {
         assertFalse(queenThreatens(7, 6, 5, 7))
     }
 
-    @Test
+     @Test
     @Tag("Easy")
-    fun daysInMonth() {
+   fun daysInMonth() {
         assertEquals(31, daysInMonth(1, 1990))
         assertEquals(28, daysInMonth(2, 1990))
         assertEquals(31, daysInMonth(3, 1990))
@@ -50,11 +50,12 @@ class Tests {
     @Test
     @Tag("Normal")
     fun circleInside() {
-        assertFalse(circleInside(0.0, 0.0, 6.0, 0.0, 0.0, 5.0))
-        assertFalse(circleInside(0.0, 0.0, 1.0, 10.0, 10.0, 9.0))
-        assertTrue(circleInside(2.0, 2.0, 2.0, 2.0, 2.0, 2.0))
-        assertTrue(circleInside(-2.0, 3.0, 2.0, -2.0, 0.0, 5.0))
-        assertFalse(circleInside(1.0, 2.0, 3.0, 4.0, 5.0, 6.0))
+       assertFalse(circleInside(0.0, 0.0, 6.0, 0.0, 0.0, 5.0))
+       assertFalse(circleInside(0.0, 0.0, 1.0, 10.0, 10.0, 9.0))
+       assertTrue(circleInside(2.0, 2.0, 2.0, 2.0, 2.0, 2.0))
+       assertTrue(circleInside(-2.0, 3.0, 2.0, -2.0, 0.0, 5.0))
+       assertFalse(circleInside(1.0, 2.0, 3.0, 4.0, 5.0, 6.0))
+
     }
 
     @Test
