@@ -3,6 +3,7 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.pow
 //import kotlin.math.sin
@@ -231,13 +232,14 @@ fun collatzSteps(x: Int): Int {
  */
 
 fun sin(x: Double, eps: Double): Double {
-    var p = x
-    var s = x
+    var p = reduc(x)
+    var s = reduc(x)
     var n = 3
     var i = 1
+    val xx = reduc(x)
     while (abs(p) > eps)  // {Условие выхода: очередной член ряда по модулю меньше eps}
     {
-        p = x.pow(n) / factorial(n)// {Вычисление очередного члена ряда}
+        p = xx.pow(n) / factorial(n)// {Вычисление очередного члена ряда}
         if (i % 2 != 0) {
             s -= p
         } else {
@@ -249,6 +251,13 @@ fun sin(x: Double, eps: Double): Double {
     return s
 }
 
+fun reduc(x: Double): Double {
+    var xx: Double = x
+    while ((xx - 2 * PI) > 2 * PI) {
+        xx -= 2 * PI
+    }
+    return xx
+}
 
 /**
  * Средняя
@@ -258,12 +267,13 @@ fun sin(x: Double, eps: Double): Double {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 fun cos(x: Double, eps: Double): Double {
-    var p = x
+    var p = reduc(x)
     var s = 1.0
     var n = 2
     var i = 1
+    val xx = reduc(x)
     while (abs(p) > eps) {
-        p = x.pow(n) / factorial(n)
+        p = xx.pow(n) / factorial(n)
         if (i % 2 != 0) {
             s -= p
         } else {
