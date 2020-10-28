@@ -188,7 +188,7 @@ fun times(a: List<Double>, b: List<Double>): Double {
 fun polynom(p: List<Double>, x: Double): Double {
     var rez = 0.0
     var c: Double
-    if (p.isEmpty()) {
+    if (p.isNotEmpty()) {
         for (i in 0 until p.size) {
             c = p[i] * x.pow(i)
             rez += c
@@ -259,6 +259,8 @@ fun convert(n: Int, base: Int): List<Int> {
     var x = n
     val mn = mutableListOf<Int>()
     while (x > 0) {
+        println(x % base)
+        println(x / base)
         mn.add(0, x % base)
         x /= base
     }
@@ -274,29 +276,22 @@ fun convert(n: Int, base: Int): List<Int> {
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
 fun convertToString(n: Int, base: Int): String {
-    return (convert(n, base)).joinToString(separator = "")
-}
-/*
-    var x = n
-    var mn = mutableListOf<Int>()
-    var element: Int
-    while (x>0){
-        if (x % base > 9){
-            when (x % base) {
-                10 -> "a"
-                11 -> "b"
-                12 -> "c"
-                13 -> "e"
-            }
+    val mn: List<String> = convert(n, base).map {
+        when (it) {
+            10 -> "a"
+            11 -> "b"
+            12 -> "c"
+            13 -> "d"
+            14 -> "e"
+            15 -> "f"
+            16 -> "g"
+            //continue
+            35 -> "z"
+            else -> "$it"
         }
-
-        mn.add(0, element)
-        x/=base
     }
-    return mn
+    return mn.joinToString(separator = "")
 }
-
-(convert(n, base)).joinToString(separator = "") */
 
 /**
  * Средняя
@@ -305,7 +300,15 @@ fun convertToString(n: Int, base: Int): String {
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var x = 0
+    val basef = base.toDouble()
+    for (i in 0 until digits.size) {
+        x += digits[i] * (basef.pow(digits.size - 1 - i)).toInt()
+        //  println("x= $x, i = $i")
+    }
+    return x
+}
 
 /**
  * Сложная
@@ -316,7 +319,37 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    var mn = mutableListOf<Int>()
+    var x: Int
+    for (i in str.indices) {
+        x = when {
+            str[i] == '0' -> 0
+            str[i] == '1' -> 1
+            str[i] == '2' -> 2
+            str[i] == '3' -> 3
+            str[i] == '4' -> 4
+            str[i] == '5' -> 5
+            str[i] == '6' -> 6
+            str[i] == '7' -> 7
+            str[i] == '8' -> 8
+            str[i] == '9' -> 9
+            str[i] == 'a' -> 10
+            str[i] == 'b' -> 11
+            str[i] == 'c' -> 12
+            str[i] == 'd' -> 13
+            str[i] == 'e' -> 14
+            str[i] == 'f' -> 15
+            str[i] == 'g' -> 16
+            //continue
+            str[i] == 'z' -> 35
+            else -> 36
+        }
+        mn = (mn + x).toMutableList()
+    }
+    println(mn)
+    return decimal(mn, base)
+}
 
 /**
  * Сложная
